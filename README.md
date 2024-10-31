@@ -1,28 +1,32 @@
 # Bash Script Reference
 
-- variables
-- strings
-- globbing
-- arrays
-- dictionaries
-- booleans
-- functions
-- control flow
-- special parameters
-- arithmetic
-- conditionals
-- regex
-- redirects
-- pipes
-- subprocesses
-- parameter expansions
-- brace expansions
-- ranges
-- strict mode
-
-- colors
-- tools
-- cli
+- [Bash Script Reference](#bash-script-reference)
+  - [Comments](#comments)
+  - [Variables](#variables)
+    - [Variable Interpolation](#variable-interpolation)
+    - [Variable Expansion (Not Recommended)](#variable-expansion-not-recommended)
+  - [Strings](#strings)
+    - [Raw Strings, Single Quotes](#raw-strings-single-quotes)
+    - [Interpolated Strings, Double Quotes](#interpolated-strings-double-quotes)
+    - [Expanded Strings, No Quotes](#expanded-strings-no-quotes)
+    - [ANSI-C Escape Strings, Dollar Sign with Single Quotes](#ansi-c-escape-strings-dollar-sign-with-single-quotes)
+    - [Multiline Strings](#multiline-strings)
+    - [String Expansion](#string-expansion)
+    - [String Concatenation/Composition](#string-concatenationcomposition)
+    - [String Slices](#string-slices)
+    - [String Length](#string-length)
+  - [Arrays](#arrays)
+    - [Indexing](#indexing)
+    - [Array Expansion](#array-expansion)
+    - [Array Keys](#array-keys)
+    - [Array Length](#array-length)
+    - [Array Concatenation](#array-concatenation)
+    - [Array Slices](#array-slices)
+    - [Array Iteration](#array-iteration)
+    - [Splitting Strings into Arrays](#splitting-strings-into-arrays)
+  - [Dictionaries](#dictionaries)
+    - [Declaration](#declaration)
+    - [Expansions](#expansions)
 
 ## Comments
 
