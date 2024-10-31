@@ -38,7 +38,7 @@
 
 ## Comments
 
-Comments are lines that start with a `#` character.
+Comments are lines that start with a `#` character. Bash does not support multi-line comments.
 
 ```bash
 # This is a comment
@@ -80,8 +80,8 @@ The only primitive datatype in bash is a string (numbers are really just strings
 Every character in the string is treated as a literal, no escape sequences, no variable interpolation, whitespace is preserved, `~` does not expand.
 
 ```bash
-RAW='hello\nworld     $X'
-echo "$RAW" # hello\nworld     $X
+RAW='hello\nworld $X'
+echo "$RAW" # hello\nworld $X
 ```
 
 ### Interpolated Strings, Double Quotes
@@ -92,8 +92,8 @@ Escapable: `\$`, `\"`, `\\`, `\\\``
 
 ```bash
 X=1
-INTERPOLATED='hello\nworld     $X'
-echo "$INTERPOLATED" # hello\nworld     1
+INTERPOLATED='hello\nworld $X'
+echo "$INTERPOLATED" # hello\nworld 1
 ```
 
 ### Expanded Strings, No Quotes
@@ -115,9 +115,9 @@ Similar to raw strings except ansi escape sequences are allowed.
 Variables are not interpolated, whitespace is preserved, `~` is not expanded, supports standard escape sequences like `\n`, `\t`, `\r`, etc.
 
 ```bash
-ESCAPED=$'hello\nworld     $X'
+ESCAPED=$'hello\nworld $X'
 echo "$ESCAPED" # hello
-#world     $X
+#world $X
 ```
 
 ### Multiline Strings
@@ -140,10 +140,10 @@ world'
 By default, if strings are not quoted, they will be expanded: [globs] will be evaluated, whitespace will collapse, and the string will be interpreted as multiple strings delimited by whitespace. It is recommended to quote your strings to prevent unwanted expansion, unless you know for certain it will not expand. Use [shell check] to help with this.
 
 ```bash
-RAW='hello      world'
+RAW='hello   world'
 echo $RAW # 'hello' 'world'
 
-echo "$RAW" # 'hello      world'
+echo "$RAW" # 'hello   world'
 ```
 
 ### String Concatenation/Composition
@@ -152,7 +152,7 @@ String types can easily be combined in one definition. This is often used if you
 
 ```bash
 VAR=hello
-COMBINED=~/"$VAR"/world/'path   with   spaces'/
+COMBINED=~/"$VAR"/world/'path with spaces'/
 ```
 
 ### String Slices
@@ -186,7 +186,6 @@ Arrays in bash are defined by using parenthesis and elements are delimited by wh
 ARRAY=(1 hello 3 world)
 
 # or multiline
-
 ARRAY=(
   1
   hello
