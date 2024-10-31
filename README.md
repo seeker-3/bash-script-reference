@@ -1,8 +1,10 @@
 # Bash Script Reference
 
 - [Bash Script Reference](#bash-script-reference)
+  - [Helpful References](#helpful-references)
   - [Comments](#comments)
   - [Variables](#variables)
+    - [Declaring and Referencing](#declaring-and-referencing)
     - [Variable Interpolation](#variable-interpolation)
     - [Variable Expansion (Not Recommended)](#variable-expansion-not-recommended)
   - [Strings](#strings)
@@ -16,6 +18,7 @@
     - [String Slices](#string-slices)
     - [String Length](#string-length)
   - [Arrays](#arrays)
+    - [Declaring](#declaring)
     - [Indexing](#indexing)
     - [Array Expansion](#array-expansion)
     - [Array Keys](#array-keys)
@@ -25,8 +28,13 @@
     - [Array Iteration](#array-iteration)
     - [Splitting Strings into Arrays](#splitting-strings-into-arrays)
   - [Dictionaries](#dictionaries)
-    - [Declaration](#declaration)
+    - [Declaring](#declaring-1)
     - [Expansions](#expansions)
+
+## Helpful References
+
+- [Bash cheatsheet](https://devhints.io/bash)
+- [Official bash manual](https://www.gnu.org/software/bash/manual/bash.html)
 
 ## Comments
 
@@ -37,6 +45,8 @@ Comments are lines that start with a `#` character.
 ```
 
 ## Variables
+
+### Declaring and Referencing
 
 Declare variables like this. Variables cannot have spaces around the `=` sign.
 
@@ -88,7 +98,7 @@ echo "$INTERPOLATED" # hello\nworld     1
 
 ### Expanded Strings, No Quotes
 
-Variables and [subshells] are interpolate, `~` expands, whitespace is not allowed, syntax characters like `()` `<>` `|` `;` are not allowed.
+Variables and [subshells] are interpolated, `~` expands, whitespace is not allowed, syntax characters like `(`, `)`, `<`, `>`, `|`, `;` are not allowed.
 
 Syntax characters and whitespace can be escaped but it is probably better to use quoted strings instead of a bunch of escapes.
 
@@ -102,7 +112,7 @@ echo "$EXPANDED" # /home/user/hello world
 
 Similar to raw strings except ansi escape sequences are allowed.
 
-Variables are not interpolated, whitespace is preserved, special characters are not expanded, supports standard escape sequences like `\n`, `\t`, `\r`, etc.
+Variables are not interpolated, whitespace is preserved, `~` is not expanded, supports standard escape sequences like `\n`, `\t`, `\r`, etc.
 
 ```bash
 ESCAPED=$'hello\nworld     $X'
@@ -168,15 +178,26 @@ echo "${#STRING}" # 11
 
 ## Arrays
 
+### Declaring
+
 Arrays in bash are defined by using parenthesis and elements are delimited by whitespace. Arrays in bash cannot be multi-dimensional.
 
 ```bash
 ARRAY=(1 hello 3 world)
+
+# or multiline
+
+ARRAY=(
+  1
+  hello
+  3
+  world
+)
 ```
 
 ### Indexing
 
-Arrays are zero indexed and be accessed like this and support negative indexing.
+Arrays are zero indexed and can be accessed like this and support negative indexing.
 
 ```bash
 echo "${ARRAY[0]}" # 1
@@ -248,6 +269,10 @@ Slice arrays by using the syntax `${ARRAY[@]:start:length}` or `${ARRAY[@]:start
 ARRAY=(0 1 2 3 4 5 6 7 8 9)
 echo "${ARRAY[@]:1:3}" # '1' '2' '3'
 echo "${ARRAY[@]:5}" # '5' '6' '7' '8' '9'
+
+# Or as a string
+echo "${ARRAY[*]:1:3}" # '1 2 3'
+echo "${ARRAY[*]:5}" # '5 6 7 8 9'
 ```
 
 ### Array Iteration
@@ -286,7 +311,7 @@ Dictionaries are similar to arrays except they use keys instead of indexes so ne
 
 Dictionaries are seldom needed and you may need a more powerful language if you find yourself needing them.
 
-### Declaration
+### Declaring
 
 You can declare a dictionary two ways.
 
@@ -295,7 +320,17 @@ declare -A DICT1
 DICT1[key1]=value1
 DICT1[key2]=value2
 
+# or
 declare -A DICT2=([key1]=value1 [key2]=value2)
+```
+
+Or multiline:
+
+```bash
+declare -A DICT2=(
+  [key1]=value1
+  [key2]=value2
+)
 ```
 
 ### Expansions
