@@ -2,31 +2,35 @@
 
 - [Bash Script Reference](#bash-script-reference)
   - [Helpful References](#helpful-references)
-  - [Comments](#comments)
-  - [Variables](#variables)
-    - [Declaring and Referencing](#declaring-and-referencing)
-    - [Variable Interpolation](#variable-interpolation)
-    - [Variable Expansion (Not Recommended)](#variable-expansion-not-recommended)
+  - [Basics](#basics)
+    - [Comments](#comments)
+    - [Variables](#variables)
+      - [Declaring Variables `VAR=x`](#declaring-variables-varx)
+      - [Referencing Variables `$VAR`](#referencing-variables-var)
+      - [Variable Interpolation](#variable-interpolation)
+      - [Variable Expansion (Not Recommended)](#variable-expansion-not-recommended)
+    - [Running Commands](#running-commands)
   - [Strings](#strings)
-    - [Raw Strings, Single Quotes](#raw-strings-single-quotes)
-    - [Interpolated Strings, Double Quotes](#interpolated-strings-double-quotes)
-    - [Expanded Strings, No Quotes](#expanded-strings-no-quotes)
-    - [ANSI-C Escape Strings, Dollar Sign with Single Quotes](#ansi-c-escape-strings-dollar-sign-with-single-quotes)
+    - [Raw Strings `'...'`](#raw-strings-)
+    - [Interpolated Strings `"...$X..."`](#interpolated-strings-x)
+    - [Expanded Strings `hello/world`](#expanded-strings-helloworld)
+    - [ANSI-C Escape Strings `$'...\n'`](#ansi-c-escape-strings-n)
     - [Multiline Strings](#multiline-strings)
-    - [String Expansion](#string-expansion)
-    - [String Concatenation](#string-concatenation)
-    - [String Composition](#string-composition)
-    - [String Slices](#string-slices)
-    - [String Length](#string-length)
+    - [String Expansion (Not Recommended)](#string-expansion-not-recommended)
+    - [String Concatenation `+=`](#string-concatenation-)
+    - [String Composition `'...'"..."`](#string-composition-)
+    - [String Slices `${STRING:start:end}`](#string-slices-stringstartend)
+    - [String Length `${#STRING}`](#string-length-string)
   - [Arrays](#arrays)
-    - [Declaring](#declaring)
-    - [Indexing](#indexing)
-    - [Array Expansion](#array-expansion)
-    - [Array Keys](#array-keys)
-    - [Array Length](#array-length)
-    - [Array Concatenation](#array-concatenation)
-    - [Array Slices](#array-slices)
-    - [Array Iteration](#array-iteration)
+    - [Declaring Arrays `ARRAY=(...)`](#declaring-arrays-array)
+    - [Indexing Arrays `${ARRAY[i]}`](#indexing-arrays-arrayi)
+    - [Array Expansion to Separate Strings `${ARRAY[@]}`](#array-expansion-to-separate-strings-array)
+    - [Array Expansion to a Single String `${ARRAY[*]}`](#array-expansion-to-a-single-string-array)
+    - [Array Keys `${!ARRAY[@]}`](#array-keys-array)
+    - [Array Length `${#ARRAY[@]}`](#array-length-array)
+    - [Array Concatenation `ARRAY2=("${ARRAY[@]}" "${ARRAY[@]}")`](#array-concatenation-array2array-array)
+    - [Array Slices `${ARRAY[@]:start:length}`](#array-slices-arraystartlength)
+    - [Array Iteration `for ... in ${ARRAY[@]}`](#array-iteration-for--in-array)
     - [Splitting Strings into Arrays](#splitting-strings-into-arrays)
     - [Practical Uses of Arrays](#practical-uses-of-arrays)
   - [Dictionaries](#dictionaries)
@@ -80,17 +84,17 @@
       - [Close a File `exec fd>&-`](#close-a-file-exec-fd-)
     - [Arithmetic Expansions `((x+=y))`](#arithmetic-expansions-xy)
     - [Expansions](#expansions)
-      - [Ranges `{1..5}`](#ranges-15)
+      - [Ranges `{start..stop..step}`](#ranges-startstopstep)
       - [Brace Expansions `prefix{middle1,middle2,}suffix`](#brace-expansions-prefixmiddle1middle2suffix)
       - [Parameter Expansions `VAR2=${VAR...}`](#parameter-expansions-var2var)
       - [Tilde Expansion `~`](#tilde-expansion-)
     - [Strict Mode](#strict-mode)
-    - [Invoking Scripts](#invoking-scripts)
-      - [Running Scripts](#running-scripts)
+    - [Running Scripts](#running-scripts)
+      - [Running Scripts as Files](#running-scripts-as-files)
       - [Running Scripts as Strings](#running-scripts-as-strings)
-        - [Running Scripts through STDIN](#running-scripts-through-stdin)
-        - [Running Scripts with `bash -c`](#running-scripts-with-bash--c)
-        - [Running Scripts with Process Substitution `bash <(...)`](#running-scripts-with-process-substitution-bash-)
+        - [Running Script Strings through STDIN](#running-script-strings-through-stdin)
+        - [Running Script Strings with `bash -c`](#running-script-strings-with-bash--c)
+        - [Running Script Strings with Process Substitution `bash <(...)`](#running-script-strings-with-process-substitution-bash-)
     - [Adding Color to Your Bash Scripts](#adding-color-to-your-bash-scripts)
     - [Debugging with `bash -x`](#debugging-with-bash--x)
     - [Helpful Tools](#helpful-tools)
@@ -102,7 +106,9 @@
 - [Bash cheatsheet](https://devhints.io/bash)
 - [Official bash manual](https://www.gnu.org/software/bash/manual/bash.html)
 
-## Comments
+## Basics
+
+### Comments
 
 Comments are lines that start with a `#` character. Bash does not support multi-line comments.
 
@@ -110,20 +116,22 @@ Comments are lines that start with a `#` character. Bash does not support multi-
 # This is a comment
 ```
 
-## Variables
+### Variables
 
-### Declaring and Referencing
+#### Declaring Variables `VAR=x`
 
-Declare variables like this. Variables cannot have spaces around the `=` sign.
+Declare variables using `=`. Variables cannot have spaces around the `=` sign.
 
 ```bash
 X=1
 ```
 
+#### Referencing Variables `$VAR`
+
 Reference a variable using the `$` sign.
 
 ```bash
-$X
+X2=$X
 ```
 
 Variables in bash are commonly written in upper snake case by convention
@@ -133,15 +141,21 @@ MY_VARIABLE=1
 echo $MY_VARIABLE # 1
 ```
 
-### Variable Interpolation
+#### Variable Interpolation
 
-### Variable Expansion (Not Recommended)
+#### Variable Expansion (Not Recommended)
+
+### Running Commands
+
+By default, anything typed on a line will be executed as a command.
+
+If you want to run a command that spans multiple lines, you can use a backslash `\` to escape the newline.
 
 ## Strings
 
 The only primitive datatype in bash is a string (numbers are really just strings!). There are several different ways to define strings.
 
-### Raw Strings, Single Quotes
+### Raw Strings `'...'`
 
 Every character in the string is treated as a literal, no escape sequences, no variable interpolation, whitespace is preserved, `~` does not expand.
 
@@ -150,7 +164,7 @@ RAW='hello\nworld $X'
 echo "$RAW" # hello\nworld $X
 ```
 
-### Interpolated Strings, Double Quotes
+### Interpolated Strings `"...$X..."`
 
 Variables and [subshells] are interpolated, interpolation can be escaped, whitespace is preserved, `~` does not expand.
 
@@ -162,11 +176,11 @@ INTERPOLATED='hello\nworld $X'
 echo "$INTERPOLATED" # hello\nworld 1
 ```
 
-### Expanded Strings, No Quotes
+### Expanded Strings `hello/world`
 
 Variables and [subshells] are interpolated, `~` expands, whitespace is not allowed, syntax characters like `(`, `)`, `<`, `>`, `|`, `;` are not allowed.
 
-Syntax characters and whitespace can be escaped but it is probably better to use quoted strings instead of a bunch of escapes.
+Syntax characters and whitespace can be escaped with `\` but it is probably better to use quoted strings instead of many escapes.
 
 ```bash
 WORLD=' world'
@@ -174,7 +188,7 @@ EXPANDED=~/hello$WORLD
 echo "$EXPANDED" # /home/user/hello world
 ```
 
-### ANSI-C Escape Strings, Dollar Sign with Single Quotes
+### ANSI-C Escape Strings `$'...\n'`
 
 Similar to raw strings except ansi escape sequences are allowed.
 
@@ -201,7 +215,7 @@ ESCAPED=$'hello
 world'
 ```
 
-### String Expansion
+### String Expansion (Not Recommended)
 
 By default, if strings are not quoted, they will be expanded: [globs] will be evaluated, whitespace will collapse, and the string will be interpreted as multiple strings delimited by whitespace. It is recommended to quote your strings to prevent unwanted expansion, unless you know for certain it will not expand. Use [shell check] to help with this.
 
@@ -212,7 +226,7 @@ echo $RAW # 'hello' 'world'
 echo "$RAW" # 'hello   world'
 ```
 
-### String Concatenation
+### String Concatenation `+=`
 
 Strings can be concatenated using the `+=` operator.
 
@@ -224,7 +238,7 @@ echo "$VAR" # hello world
 
 Note that bash is unique in that you can use `+=` but cannot use `+` by itself to concatenate strings `VAR=x+y` ❌. Instead you would use interpolation `VAR="$x$y"` ✅.
 
-### String Composition
+### String Composition `'...'"..."`
 
 String types can easily be combined in one definition. This is often used if you need the properties of multiple strings at once.
 
@@ -233,7 +247,7 @@ VAR=hello
 COMBINED=~/"$VAR"/world/'path with spaces'/
 ```
 
-### String Slices
+### String Slices `${STRING:start:end}`
 
 Strings can be sliced using the syntax `${STRING:start:end}` or `${STRING:start}` or `${STRING::end}`. String slices support negative indexing.
 
@@ -245,7 +259,7 @@ echo "${STRING:6}" # world
 echo "${STRING:6:-1}" # worl
 ```
 
-### String Length
+### String Length `${#STRING}`
 
 Get the length of a string using the `#` symbol.
 
@@ -256,7 +270,7 @@ echo "${#STRING}" # 11
 
 ## Arrays
 
-### Declaring
+### Declaring Arrays `ARRAY=(...)`
 
 Arrays in bash are defined by using parenthesis and elements are delimited by whitespace. Arrays in bash cannot be multi-dimensional.
 
@@ -272,7 +286,7 @@ ARRAY=(
 )
 ```
 
-### Indexing
+### Indexing Arrays `${ARRAY[i]}`
 
 Arrays are zero indexed and can be accessed like this and support negative indexing.
 
@@ -289,7 +303,7 @@ ARRAY[0]=2
 echo "${ARRAY[0]}" # 2
 ```
 
-### Array Expansion
+### Array Expansion to Separate Strings `${ARRAY[@]}`
 
 To get the whole array, use the `@` symbol. Referencing the array by itself will only return the first element.
 
@@ -306,13 +320,15 @@ echo "${ARRAY[@]}" # '1' 'hello world' '3' 'world'
 echo  ${ARRAY[@]}  # '1' 'hello' 'world' '3' 'world'
 ```
 
+### Array Expansion to a Single String `${ARRAY[*]}`
+
 To convert the array to a string, use the `*` symbol.
 
 ```bash
 echo "${ARRAY[*]}" # '1 hello 3 world'
 ```
 
-### Array Keys
+### Array Keys `${!ARRAY[@]}`
 
 Get the keys of an array using the `!` symbol.
 
@@ -320,7 +336,7 @@ Get the keys of an array using the `!` symbol.
 echo "${!ARRAY[@]}" # 0 1 2 3
 ```
 
-### Array Length
+### Array Length `${#ARRAY[@]}`
 
 Get the length of an array using the `#` symbol.
 
@@ -328,7 +344,7 @@ Get the length of an array using the `#` symbol.
 echo "${#ARRAY[@]}" # 4
 ```
 
-### Array Concatenation
+### Array Concatenation `ARRAY2=("${ARRAY[@]}" "${ARRAY[@]}")`
 
 Concatenate arrays by spreading them them.
 
@@ -338,7 +354,7 @@ ARRAY2=("${ARRAY[@]}" x y "${ARRAY[@]}")
 echo "${ARRAY[@]}" # '1' 'hello' '3' 'world' 'x' 'y' '1' 'hello' '3' 'world'
 ```
 
-### Array Slices
+### Array Slices `${ARRAY[@]:start:length}`
 
 Slice arrays by using the syntax `${ARRAY[@]:start:length}` or `${ARRAY[@]:start}`. Array slices do not support negative indexing.
 
@@ -352,7 +368,7 @@ echo "${ARRAY[*]:1:3}" # '1 2 3'
 echo "${ARRAY[*]:5}" # '5 6 7 8 9'
 ```
 
-### Array Iteration
+### Array Iteration `for ... in ${ARRAY[@]}`
 
 Iterate over an array using the `@` symbol.
 
@@ -367,8 +383,8 @@ done
 Split a string into an array using `read`.
 
 ```bash
-STR='1 2 3'
-read -ra ARRAY <<<"$STR"
+STRING='1 2 3'
+read -ra ARRAY <<<"$STRING"
 echo "${ARRAY[@]}" # '1' '2' '3'
 ```
 
@@ -398,6 +414,23 @@ or
 CMD=(echo 1 2 3)
 
 "${CMD[@]}" # 1 2 3
+```
+
+You could also do this with an `alias` but I typically prefer arrays when scripting and aliases for my rc files.
+
+If you have a command that takes many options, using an array can be a much tidier way to write it since the only way to break up a long command is to use the `\` to escape newlines.
+
+```bash
+COMMAND_ARGS=(
+    -x thing1
+    -x thing2
+    -x thing3
+    -y other-thing
+    --option1
+    --option2
+)
+
+command "${COMMAND_ARGS[@]}"
 ```
 
 ## Dictionaries
@@ -757,7 +790,7 @@ Control flow in bash works very differently to other languages. Instead of branc
 
 ### Expansions
 
-#### Ranges `{1..5}`
+#### Ranges `{start..stop..step}`
 
 ```bash
 echo {1..5} # 1 2 3 4 5
@@ -785,9 +818,9 @@ echo {0..10..2} # 0 2 4 6 8 10
 set -euo pipefail
 ```
 
-### Invoking Scripts
+### Running Scripts
 
-#### Running Scripts
+#### Running Scripts as Files
 
 ```bash
 bash script.bash
@@ -800,23 +833,24 @@ chmod u+x script.bash
 
 #### Running Scripts as Strings
 
-##### Running Scripts through STDIN
+##### Running Script Strings through STDIN
 
 ```bash
 bash <script.bash
-echo 'echo hello world!' | bash
+echo 'echo hello world!' | bash # hello world
+bash <<<'echo hello world!' # hello world
 cat script.bash | bash
 curl -fsSL https://example.com/script.bash | bash
 ```
 
-##### Running Scripts with `bash -c`
+##### Running Script Strings with `bash -c`
 
 ```bash
 bash -c "echo Hello world!"
 bash -c "$(curl -fsSL https://example.com/script.bash)"
 ```
 
-##### Running Scripts with Process Substitution `bash <(...)`
+##### Running Script Strings with Process Substitution `bash <(...)`
 
 ```bash
 bash <(cat script.bash)
