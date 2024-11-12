@@ -14,7 +14,8 @@
     - [ANSI-C Escape Strings, Dollar Sign with Single Quotes](#ansi-c-escape-strings-dollar-sign-with-single-quotes)
     - [Multiline Strings](#multiline-strings)
     - [String Expansion](#string-expansion)
-    - [String Concatenation/Composition](#string-concatenationcomposition)
+    - [String Concatenation](#string-concatenation)
+    - [String Composition](#string-composition)
     - [String Slices](#string-slices)
     - [String Length](#string-length)
   - [Arrays](#arrays)
@@ -27,9 +28,74 @@
     - [Array Slices](#array-slices)
     - [Array Iteration](#array-iteration)
     - [Splitting Strings into Arrays](#splitting-strings-into-arrays)
+    - [Practical Uses of Arrays](#practical-uses-of-arrays)
   - [Dictionaries](#dictionaries)
-    - [Declaring](#declaring-1)
+    - [Declaring Dictionaries](#declaring-dictionaries)
+    - [Dictionary Expansions](#dictionary-expansions)
+  - [Globbing](#globbing)
+    - [Wildcards `*`](#wildcards-)
+    - [Directory Wildcards `**/pattern`](#directory-wildcards-pattern)
+    - [Single Character `?`](#single-character-)
+    - [Single Character Ranges `[...]`](#single-character-ranges-)
+    - [Extended Globbing](#extended-globbing)
+      - [Match Zero or One Pattern List `?(pattern-list)`](#match-zero-or-one-pattern-list-pattern-list)
+      - [Match Zero or More Pattern List `*(pattern-list)`](#match-zero-or-more-pattern-list-pattern-list)
+      - [Match One or More Pattern List `+(pattern-list)`](#match-one-or-more-pattern-list-pattern-list)
+      - [Match One of the Pattern List `@(pattern-list)`](#match-one-of-the-pattern-list-pattern-list)
+      - [Match Anything Except One of the Pattern List `!(pattern-list)`](#match-anything-except-one-of-the-pattern-list-pattern-list)
+    - [Globbing Options](#globbing-options)
+    - [Special Parameters `$@`, `$*`, `$#`, `$?`, `$$`, `$!`](#special-parameters------)
+      - [Command Line Arguments](#command-line-arguments)
+        - [Command Line Arguments as an Array `$@`](#command-line-arguments-as-an-array-)
+        - [Command Line Arguments as a String `$*`](#command-line-arguments-as-a-string-)
+        - [Get the Number of Command Line Arguments `$#`](#get-the-number-of-command-line-arguments-)
+        - [Access Individual Command Line Arguments `$n`](#access-individual-command-line-arguments-n)
+        - [Get the Name of the Script `$0`](#get-the-name-of-the-script-0)
+      - [Process Introspection](#process-introspection)
+    - [Subshells](#subshells)
+      - [Command Substitution `$(...)`](#command-substitution-)
+      - [Process Substitution `<(...)`](#process-substitution-)
+    - [Control Flow](#control-flow)
+      - [If Statements](#if-statements)
+      - [For Loops](#for-loops)
+      - [While Loops](#while-loops)
+      - [Case Statements](#case-statements)
+    - [Conditionals](#conditionals)
+      - [`[[]]`](#)
+      - [`[]`](#-1)
+      - [`test`](#test)
+      - ["Booleans"](#booleans)
+      - [Regex `=~`](#regex-)
+    - [Functions](#functions)
+    - [Pipes](#pipes)
+      - [Pipe STDOUT to STDIN `|`](#pipe-stdout-to-stdin-)
+      - [Pipe STDOUT and STDERR to STDIN `|&`](#pipe-stdout-and-stderr-to-stdin-)
+    - [Redirects](#redirects)
+      - [Read a File to STDIN `<`](#read-a-file-to-stdin-)
+      - [Read a String to STDIN `<<<`](#read-a-string-to-stdin-)
+      - [Write to a File from STDOUT `>`](#write-to-a-file-from-stdout-)
+      - [Append to a File from STDOUT `>>`](#append-to-a-file-from-stdout-)
+      - [File Descriptors](#file-descriptors)
+      - [Open a File `exec fd<>file.txt`](#open-a-file-exec-fdfiletxt)
+      - [Close a File `exec fd>&-`](#close-a-file-exec-fd-)
+    - [Arithmetic Expansions `((x+=y))`](#arithmetic-expansions-xy)
     - [Expansions](#expansions)
+      - [Ranges `{1..5}`](#ranges-15)
+      - [Brace Expansions `prefix{middle1,middle2,}suffix`](#brace-expansions-prefixmiddle1middle2suffix)
+      - [Parameter Expansions `VAR2=${VAR...}`](#parameter-expansions-var2var)
+      - [Tilde Expansion `~`](#tilde-expansion-)
+    - [Strict Mode](#strict-mode)
+    - [Invoking Scripts](#invoking-scripts)
+      - [Running Scripts](#running-scripts)
+      - [Running Scripts as Strings](#running-scripts-as-strings)
+        - [Running Scripts through STDIN](#running-scripts-through-stdin)
+        - [Running Scripts with `bash -c`](#running-scripts-with-bash--c)
+        - [Running Scripts with Process Substitution `bash <(...)`](#running-scripts-with-process-substitution-bash-)
+    - [Adding Color to Your Bash Scripts](#adding-color-to-your-bash-scripts)
+    - [Debugging with `bash -x`](#debugging-with-bash--x)
+    - [Helpful Tools](#helpful-tools)
+      - [`shfmt` a shell script formatter](#shfmt-a-shell-script-formatter)
+      - [`shellcheck` a shell script linter](#shellcheck-a-shell-script-linter)
 
 ## Helpful References
 
@@ -146,7 +212,19 @@ echo $RAW # 'hello' 'world'
 echo "$RAW" # 'hello   world'
 ```
 
-### String Concatenation/Composition
+### String Concatenation
+
+Strings can be concatenated using the `+=` operator.
+
+```bash
+VAR=hello
+VAR+=' world'
+echo "$VAR" # hello world
+```
+
+Note that bash is unique in that you can use `+=` but cannot use `+` by itself to concatenate strings `VAR=x+y` ❌. Instead you would use interpolation `VAR="$x$y"` ✅.
+
+### String Composition
 
 String types can easily be combined in one definition. This is often used if you need the properties of multiple strings at once.
 
@@ -304,13 +382,31 @@ mapfile -t ARRAY <<<"$FILE"
 echo "${ARRAY[@]}" # '1' '2' '3'
 ```
 
+### Practical Uses of Arrays
+
+Bash arrays can either be used to hold a command's arguments or a command plus its arguments. Here are some examples:
+
+```bash
+ARGS=(1 2 3)
+
+echo "${ARGS[@]}" # 1 2 3
+```
+
+or
+
+```bash
+CMD=(echo 1 2 3)
+
+"${CMD[@]}" # 1 2 3
+```
+
 ## Dictionaries
 
 Dictionaries are similar to arrays except they use keys instead of indexes so nearly all the same features apply. However, dictionaries do not support an easy way to concatenated/union them together like arrays, and reading them from a string is not as straight forward.
 
 Dictionaries are seldom needed and you may need a more powerful language if you find yourself needing them.
 
-### Declaring
+### Declaring Dictionaries
 
 You can declare a dictionary two ways.
 
@@ -332,7 +428,7 @@ declare -A DICT2=(
 )
 ```
 
-### Expansions
+### Dictionary Expansions
 
 Get the keys of a dictionary using the `!` symbol (same as arrays). Use `@` to get them an an array `*` to get them as a string.
 
@@ -349,3 +445,390 @@ declare -A DICT2=([key1]=value1 [key2]=value2)
 echo "${DICT2[@]}" # 'key1 key2'
 echo "${DICT2[*]}" # 'key1 key2'
 ```
+
+## Globbing
+
+Globbing is a basic pattern matching feature that lets you match files or strings. A glob expression will expand to a list of files that match the pattern. If no files match the pattern, the glob expression will remain unexpanded.
+
+### Wildcards `*`
+
+The `*` character matches zero or more characters.
+
+This will print all files in the current directory.
+
+```bash
+echo *
+```
+
+This will print all the `.txt` files in the current directory.
+
+```bash
+echo *.txt
+```
+
+Print all files with `config` in the name.
+
+```bash
+echo *config*
+```
+
+### Directory Wildcards `**/pattern`
+
+The `shopt -s globstar` option must be enabled to use this feature.
+
+When a glob pattern is prefixed with `**/`, it will recursively search the current directory and all subdirectories for files that match the pattern.
+
+### Single Character `?`
+
+The `?` character matches exactly one character.
+
+In a JavaScript project that has a mix of JS and TS files, you could use `?` in the following way to match `script.js` and `script.ts`.
+
+```bash
+echo script.?s
+```
+
+### Single Character Ranges `[...]`
+
+Similar to regular expressions, match a single character in a range.
+
+Match all files that start with `a`, or `c`.
+
+```bash
+echo [ac]*
+```
+
+If you have contiguous characters, you can use a `-` such as `[a-z]`, `[A-Z]`, `[0-9]`.
+
+Match any file that starts with a lowercase letter `a` to `z`.
+
+```bash
+echo [a-z]*
+```
+
+Exclude a range by using `^`.
+
+Match any file that does not start with a lowercase letter `a` to `z`.
+
+```bash
+echo [^a-z]*
+```
+
+Lastly, the brackets come with a prebuilt set of ranges
+
+```txt
+alnum   alpha   ascii   blank   cntrl   digit   graph   lower
+print   punct   space   upper   word    xdigit
+```
+
+For example, to match all files that start with a digit or a letter.
+
+```bash
+echo [[:digit:][:alpha:]]*
+```
+
+### Extended Globbing
+
+Bash has an extended globbing feature that should be on by default in newer version fo bash can be turned on with `shopt -s extglob`. Extended globs allow you to specify lists of patterns separated by `|`.
+
+#### Match Zero or One Pattern List `?(pattern-list)`
+
+If you wanted to match all `.txt` files, `.bash` files, or no extension files, you could use the following pattern.
+
+```bash
+echo *?(.txt|.bash)
+```
+
+#### Match Zero or More Pattern List `*(pattern-list)`
+
+TODO
+
+#### Match One or More Pattern List `+(pattern-list)`
+
+TODO
+
+#### Match One of the Pattern List `@(pattern-list)`
+
+TODO
+
+#### Match Anything Except One of the Pattern List `!(pattern-list)`
+
+TODO
+
+### Globbing Options
+
+Bash has several globbing options that can be set by placing `shopt -s option` at the top of your script. Options can be unset with `shopt -u option`.
+
+By default if a glob is not match, it will not expand. If you did the following glob in a directory that had not txt files, it would not expand. `*.txt` would stay as `*.txt`.
+
+```bash
+echo *.txt # *.txt
+```
+
+This is often not ideal if you want to error check that a glob was able to match files.
+
+- `shopt -s nullglob`: If a glob does not match, it will return the empty string.
+- `shopt -s failglob`: If a glob does not match, it will throw an error exiting the script if unhandled.
+- `shopt -s dotglob`: By default, `echo *` will not include files that start with a `.`. This option will include them.
+- `shopt -s extglob`: Extended globbing syntax to match lists of glob patterns. Should be on by default in newer versions of bash.
+- `shopt -s nocaseglob`: Makes globs case insensitive.
+- `shopt -s globstar`: When set `**` will match zero or more directories recursively.
+- `shopt -s nocasematch`: Makes case insensitive matching for `[[` globs or `case` statements.
+
+### Special Parameters `$@`, `$*`, `$#`, `$?`, `$$`, `$!`
+
+Special parameters are readonly variables that are set by the shell. They are used to read positional arguments to the script and to introspect processes.
+
+#### Command Line Arguments
+
+##### Command Line Arguments as an Array `$@`
+
+`$@` gets all the arguments passed to the script as separate strings.
+
+From the cli
+
+```bash
+bash script.bash 1 2 3
+```
+
+In the script
+
+```bash
+echo "$@" # 1 2 3
+```
+
+`@` is an array, so you can use any syntax listed in the array section to access the elements.
+
+From the cli
+
+```bash
+bash script.bash 1 2 3 4 5
+```
+
+In the script using an array slice
+
+```bash
+echo "${@:2:3}" # 2 3 4
+```
+
+If you use a for loop with no `in` clause, it will iterate over the cli arguments by default.
+
+```bash
+for ARG; do
+  echo "$ARG"
+done
+```
+
+##### Command Line Arguments as a String `$*`
+
+`$*` gets all the arguments passed to the script as a single string.
+
+From the cli
+
+```bash
+bash script.bash 1 2 3
+```
+
+In the script
+
+```bash
+echo "$*" # 1 2 3
+```
+
+##### Get the Number of Command Line Arguments `$#`
+
+`$#` gets the number of arguments passed to the script.
+
+From the cli
+
+```bash
+bash script.bash 1 2 3
+```
+
+In the script
+
+```bash
+echo $# # 3
+```
+
+##### Access Individual Command Line Arguments `$n`
+
+`$n` gets the nth argument passed to the script.
+
+From the cli
+
+```bash
+bash script.bash 1 2 3 4 5
+```
+
+In the script using an array slice
+
+```bash
+echo "$1 $4 $5"
+```
+
+##### Get the Name of the Script `$0`
+
+`$0` gets the name of the script.
+
+From the cli
+
+```bash
+bash script.bash 1 2 3
+```
+
+In the script
+
+```bash
+echo "$0" # script.bash
+```
+
+<!-- Get the set options `$-` -->
+
+#### Process Introspection
+
+`$?` gets the exit status of the last command.
+
+```bash
+(exit 42)
+echo $? # 42
+```
+
+This can be useful if you are checking for a specific error status, however most of the time you should use `if` statements to check if a command failed or not.
+
+- `$$` gets the process id of the current script.
+- `$!` gets the process id of the last command run in the background.
+
+### Subshells
+
+#### Command Substitution `$(...)`
+
+#### Process Substitution `<(...)`
+
+### Control Flow
+
+Control flow in bash works very differently to other languages. Instead of branching on `true` or `false`, bash will branch on the exit status of a command. A successful command with an exit status of `0` is `true`, and a failed command with a non-zero exit status of `1..255` is `false`.
+
+#### If Statements
+
+#### For Loops
+
+#### While Loops
+
+#### Case Statements
+
+### Conditionals
+
+#### `[[]]`
+
+#### `[]`
+
+#### `test`
+
+#### "Booleans"
+
+#### Regex `=~`
+
+### Functions
+
+### Pipes
+
+#### Pipe STDOUT to STDIN `|`
+
+#### Pipe STDOUT and STDERR to STDIN `|&`
+
+### Redirects
+
+#### Read a File to STDIN `<`
+
+#### Read a String to STDIN `<<<`
+
+#### Write to a File from STDOUT `>`
+
+#### Append to a File from STDOUT `>>`
+
+#### File Descriptors
+
+#### Open a File `exec fd<>file.txt`
+
+#### Close a File `exec fd>&-`
+
+### Arithmetic Expansions `((x+=y))`
+
+### Expansions
+
+#### Ranges `{1..5}`
+
+```bash
+echo {1..5} # 1 2 3 4 5
+```
+
+```bash
+for i in {1..5}; do
+  echo "$i"
+done
+```
+
+```bash
+echo {0..10..2} # 0 2 4 6 8 10
+```
+
+#### Brace Expansions `prefix{middle1,middle2,}suffix`
+
+#### Parameter Expansions `VAR2=${VAR...}`
+
+#### Tilde Expansion `~`
+
+### Strict Mode
+
+```bash
+set -euo pipefail
+```
+
+### Invoking Scripts
+
+#### Running Scripts
+
+```bash
+bash script.bash
+```
+
+```bash
+chmod u+x script.bash
+./script.bash
+```
+
+#### Running Scripts as Strings
+
+##### Running Scripts through STDIN
+
+```bash
+bash <script.bash
+echo 'echo hello world!' | bash
+cat script.bash | bash
+curl -fsSL https://example.com/script.bash | bash
+```
+
+##### Running Scripts with `bash -c`
+
+```bash
+bash -c "echo Hello world!"
+bash -c "$(curl -fsSL https://example.com/script.bash)"
+```
+
+##### Running Scripts with Process Substitution `bash <(...)`
+
+```bash
+bash <(cat script.bash)
+bash <(curl -fsSL https://example.com/script.bash)
+```
+
+### Adding Color to Your Bash Scripts
+
+### Debugging with `bash -x`
+
+### Helpful Tools
+
+#### `shfmt` a shell script formatter
+
+#### `shellcheck` a shell script linter
