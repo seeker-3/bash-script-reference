@@ -56,7 +56,8 @@
         - [Access Individual Command Line Arguments `$n`](#access-individual-command-line-arguments-n)
         - [Get the Name of the Script `$0`](#get-the-name-of-the-script-0)
       - [Process Introspection](#process-introspection)
-    - [Subshells](#subshells)
+    - [Subshells `()`](#subshells-)
+      - [Command Groups `{}`](#command-groups-)
       - [Command Substitution `$(...)`](#command-substitution-)
       - [Process Substitution `<(...)`](#process-substitution-)
     - [Control Flow](#control-flow)
@@ -71,6 +72,13 @@
       - ["Booleans"](#booleans)
       - [Regex `=~`](#regex-)
     - [Functions](#functions)
+      - [Defining Functions `fn() { ... }`](#defining-functions-fn---)
+      - [Calling Functions `fn`](#calling-functions-fn)
+      - [Calling Functions with Arguments `fn 1 2 3`](#calling-functions-with-arguments-fn-1-2-3)
+      - [Using Functions Arguments `"$@"`](#using-functions-arguments-)
+      - [Returning Exit Codes `return`](#returning-exit-codes-return)
+      - ["Returning" Values `echo -n ...`](#returning-values-echo--n-)
+      - [Brackets vs. Parentheses](#brackets-vs-parentheses)
     - [Pipes](#pipes)
       - [Pipe STDOUT to STDIN `|`](#pipe-stdout-to-stdin-)
       - [Pipe STDOUT and STDERR to STDIN `|&`](#pipe-stdout-and-stderr-to-stdin-)
@@ -732,7 +740,9 @@ This can be useful if you are checking for a specific error status, however most
 - `$$` gets the process id of the current script.
 - `$!` gets the process id of the last command run in the background.
 
-### Subshells
+### Subshells `()`
+
+#### Command Groups `{}`
 
 #### Command Substitution `$(...)`
 
@@ -763,6 +773,20 @@ Control flow in bash works very differently to other languages. Instead of branc
 #### Regex `=~`
 
 ### Functions
+
+#### Defining Functions `fn() { ... }`
+
+#### Calling Functions `fn`
+
+#### Calling Functions with Arguments `fn 1 2 3`
+
+#### Using Functions Arguments `"$@"`
+
+#### Returning Exit Codes `return`
+
+#### "Returning" Values `echo -n ...`
+
+#### Brackets vs. Parentheses
 
 ### Pipes
 
