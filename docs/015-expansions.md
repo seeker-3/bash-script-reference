@@ -1,6 +1,6 @@
-## Expansions
+# Expansions
 
-### Ranges `{start..stop..step}`
+## Ranges `{start..stop..step}`
 
 ```bash
 echo {1..5} # 1 2 3 4 5
@@ -16,9 +16,9 @@ done
 echo {0..10..2} # 0 2 4 6 8 10
 ```
 
-### Brace Expansions `prefix{middle1,middle2,}suffix`
+## Brace Expansions `prefix{middle1,middle2,}suffix`
 
-### Parameter Expansions `VAR2=${VAR...}`
+## Parameter Expansions `VAR2=${VAR...}`
 
 - `${parameter:-word}` default value
 - `${parameter:=word}` default value and set
@@ -50,4 +50,4 @@ echo {0..10..2} # 0 2 4 6 8 10
   - `a` Get all the flags for the variable's declaration
   - `k` Get all dict keys and values as separate strings `${!parameter[@]}` `'key1' 'value1' 'key2' 'value2'`
 
-### Tilde Expansion `~`
+## Tilde Expansion `~`

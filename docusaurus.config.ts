@@ -2,8 +2,6 @@ import type * as Preset from '@docusaurus/preset-classic'
 import type { Config } from '@docusaurus/types'
 import { themes as prismThemes } from 'prism-react-renderer'
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const title = 'Bash Script Reference'
 
 export default {
@@ -11,11 +9,12 @@ export default {
   tagline: 'Bash is cool',
   favicon: 'img/SimpleIconsGnubashDark.svg',
 
-  // Set the production url of your site here
+  // Production url
   url: 'https://seeker-3.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/bash-script-reference/',
+  trailingSlash: false,
 
   // GitHub pages deployment config.
   organizationName: 'seeker-3',
@@ -23,6 +22,8 @@ export default {
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'warn',
+  onDuplicateRoutes: 'throw',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -43,6 +44,7 @@ export default {
           // 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/'
           editUrl: `https://github.com/seeker-3/bash-script-reference/tree/main/`,
         },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -52,7 +54,7 @@ export default {
 
   themeConfig: {
     // Replace with your project's social card
-    // image: 'img/docusaurus-social-card.jpg',
+    image: 'img/SimpleIconsGnubash.png',
     navbar: {
       title,
       logo: {
@@ -63,7 +65,7 @@ export default {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'referenceSidebar',
           position: 'left',
           label: 'Reference',
         },

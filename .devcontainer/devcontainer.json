@@ -1,0 +1,47 @@
+{
+  "name": "Node Dev Container",
+  "build": { "dockerfile": "Dockerfile" },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // General
+        "GitHub.copilot",
+        "aaron-bond.better-comments",
+        "EditorConfig.EditorConfig",
+        "streetsidesoftware.code-spell-checker",
+
+        // Docker
+        "ms-azuretools.vscode-docker",
+
+        // Shell script
+        "foxundermoon.shell-format",
+
+        // Markdown
+        "yzhang.markdown-all-in-one",
+        "DavidAnson.vscode-markdownlint",
+
+        // JS
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next",
+        "redhat.vscode-yaml",
+        "oven.bun-vscode",
+        "denoland.vscode-deno",
+        "mikestead.dotenv",
+        "YoavBls.pretty-ts-errors"
+      ],
+      "settings": {
+        "prettier.useEditorConfig": true,
+        "[dockerfile][dotenv][gitignore][shellscript]": {
+          "editor.defaultFormatter": "foxundermoon.shell-format"
+        },
+        "[json][jsonc][markdown][typescript][yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "corepack install && pnpm i"
+}

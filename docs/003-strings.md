@@ -110,7 +110,7 @@ echo "${STRING:6}" # world
 echo "${STRING:6:-1}" # worl
 ```
 
-## String Length `${#STRING}`
+## String Length
 
 Get the length of a string using the `#` symbol.
 

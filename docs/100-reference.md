@@ -1,6 +1,6 @@
-# Bash Script Reference
+# Full Reference
 
-- [Bash Script Reference](#bash-script-reference)
+- [Full Reference](#full-reference)
   - [Helpful References](#helpful-references)
   - [Basics](#basics)
     - [Comments](#comments)
@@ -20,14 +20,14 @@
     - [String Concatenation `+=`](#string-concatenation-)
     - [String Composition `'...'"..."`](#string-composition-)
     - [String Slices `${STRING:start:end}`](#string-slices-stringstartend)
-    - [String Length `${#STRING}`](#string-length-string)
+    - [String Length](#string-length)
   - [Arrays](#arrays)
     - [Declaring Arrays `ARRAY=(...)`](#declaring-arrays-array)
     - [Indexing Arrays `${ARRAY[i]}`](#indexing-arrays-arrayi)
     - [Array Expansion to Separate Strings `${ARRAY[@]}`](#array-expansion-to-separate-strings-array)
     - [Array Expansion to a Single String `${ARRAY[*]}`](#array-expansion-to-a-single-string-array)
     - [Array Keys `${!ARRAY[@]}`](#array-keys-array)
-    - [Array Length `${#ARRAY[@]}`](#array-length-array)
+    - [Array Length](#array-length)
     - [Array Concatenation `ARRAY2=("${ARRAY[@]}" "${ARRAY[@]}")`](#array-concatenation-array2array-array)
     - [Array Slices `${ARRAY[@]:start:length}`](#array-slices-arraystartlength)
     - [Array Iteration `for ... in ${ARRAY[@]}`](#array-iteration-for--in-array)
@@ -268,7 +268,7 @@ echo "${STRING:6}" # world
 echo "${STRING:6:-1}" # worl
 ```
 
-### String Length `${#STRING}`
+### String Length
 
 Get the length of a string using the `#` symbol.
 
@@ -345,7 +345,7 @@ Get the keys of an array using the `!` symbol.
 echo "${!ARRAY[@]}" # 0 1 2 3
 ```
 
-### Array Length `${#ARRAY[@]}`
+### Array Length
 
 Get the length of an array using the `#` symbol.
 

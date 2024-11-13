@@ -66,7 +66,7 @@ Get the keys of an array using the `!` symbol.
 echo "${!ARRAY[@]}" # 0 1 2 3
 ```
 
-## Array Length `${#ARRAY[@]}`
+## Array Length `#`
 
 Get the length of an array using the `#` symbol.
 

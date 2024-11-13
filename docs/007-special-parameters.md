@@ -1,10 +1,10 @@
-## Special Parameters `$@`, `$*`, `$#`, `$?`, `$$`, `$!`
+# Special Parameters `$@`
 
 Special parameters are readonly variables that are set by the shell. They are used to read positional arguments to the script and to introspect processes.
 
-### Command Line Arguments
+## Command Line Arguments
 
-#### Command Line Arguments as an Array `$@`
+### Command Line Arguments as an Array `$@`
 
 `$@` gets all the arguments passed to the script as separate strings.
 
@@ -42,7 +42,7 @@ for ARG; do
 done
 ```
 
-#### Command Line Arguments as a String `$*`
+### Command Line Arguments as a String `$*`
 
 `$*` gets all the arguments passed to the script as a single string.
 
@@ -58,7 +58,7 @@ In the script
 echo "$*" # 1 2 3
 ```
 
-#### Get the Number of Command Line Arguments `$#`
+### Get the Number of Command Line Arguments `$#`
 
 `$#` gets the number of arguments passed to the script.
 
@@ -74,7 +74,7 @@ In the script
 echo $# # 3
 ```
 
-#### Access Individual Command Line Arguments `$n`
+### Access Individual Command Line Arguments `$n`
 
 `$n` gets the nth argument passed to the script.
 
@@ -90,7 +90,7 @@ In the script using an array slice
 echo "$1 $4 $5"
 ```
 
-#### Get the Name of the Script `$0`
+### Get the Name of the Script `$0`
 
 `$0` gets the name of the script.
 
@@ -108,7 +108,7 @@ echo "$0" # script.bash
 
 <!-- Get the set options `$-` -->
 
-### Process Introspection
+## Process Introspection
 
 `$?` gets the exit status of the last command.
 
