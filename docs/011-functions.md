@@ -8,6 +8,8 @@
 
 ## Using Functions Arguments `"$@"`
 
+## Local Variables `local`
+
 ## Returning Exit Codes `return`
 
 ## "Returning" Values `echo -n ...`

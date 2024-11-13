@@ -78,7 +78,8 @@ export default {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.nightOwl,
+      darkTheme: prismThemes.dracula,
+      additionalLanguages: ['bash'],
     },
   } satisfies Preset.ThemeConfig,
 } satisfies Config
