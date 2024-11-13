@@ -1,0 +1,13 @@
+# Conditionals
+
+## `(())`
+
+## `[[]]`
+
+## `[]`
+
+## `test`
+
+## "Booleans"
+
+## Regex `=~`

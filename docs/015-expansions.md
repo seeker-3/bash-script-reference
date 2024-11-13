@@ -1,0 +1,53 @@
+## Expansions
+
+### Ranges `{start..stop..step}`
+
+```bash
+echo {1..5} # 1 2 3 4 5
+```
+
+```bash
+for i in {1..5}; do
+  echo "$i"
+done
+```
+
+```bash
+echo {0..10..2} # 0 2 4 6 8 10
+```
+
+### Brace Expansions `prefix{middle1,middle2,}suffix`
+
+### Parameter Expansions `VAR2=${VAR...}`
+
+- `${parameter:-word}` default value
+- `${parameter:=word}` default value and set
+- `${parameter:?word}` error message
+- `${parameter:+word}` alternate value
+- `${!prefix*}` all variables with prefix as a single string
+- `${!prefix@}` all variables with prefix as separate strings
+- `${parameter#word}` remove prefix
+- `${parameter##word}` remove prefix greedy
+- `${parameter%word}` remove suffix
+- `${parameter%%word}` remove suffix greedy
+- `${parameter/pattern/string}` replace first
+- `${parameter//pattern/string}` replace all
+- `${parameter/#pattern/string}` replace prefix
+- `${parameter/%pattern/string}` replace suffix
+- `${parameter^pattern}` capitalize first
+- `${parameter^^pattern}` capitalize all
+- `${parameter,pattern}` lower first
+- `${parameter,,pattern}` lower all
+- `${parameter@operator}` apply operator
+  - `U` uppercase
+  - `u` capitalize
+  - `L` lowercase
+  - `Q` escape and quote
+  - `E` escape?
+  - `P` interpret string as a variable
+  - `A` Generate a declare statement that, when evaluated, will recreate the array
+  - `K` Get all dict keys and values as a string. Values will be double quoted `'key1 "value1" key2 "value2"'`
+  - `a` Get all the flags for the variable's declaration
+  - `k` Get all dict keys and values as separate strings `${!parameter[@]}` `'key1' 'value1' 'key2' 'value2'`
+
+### Tilde Expansion `~`
