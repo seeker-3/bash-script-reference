@@ -1,7 +1,6 @@
 {
   "name": "bash-script-reference",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start --host 0.0.0.0",
