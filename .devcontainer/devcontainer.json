@@ -15,6 +15,7 @@
 
         // Shell script
         "foxundermoon.shell-format",
+        "timonwong.shellcheck",
 
         // Markdown
         "yzhang.markdown-all-in-one",

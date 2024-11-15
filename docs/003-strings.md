@@ -23,7 +23,7 @@ INTERPOLATED='hello\nworld $X'
 echo "$INTERPOLATED" # hello\nworld 1
 ```
 
-## Expanded Strings `hello/world`
+## Unquoted Strings `hello/world`
 
 Variables and [subshells] are interpolated, `~` expands, whitespace is not allowed, syntax characters like `(`, `)`, `<`, `>`, `|`, `;` are not allowed.
 
@@ -62,9 +62,10 @@ ESCAPED=$'hello
 world'
 ```
 
+<!--
 ## String Word Splitting (Not Recommended)
 
-By default, if strings are not quoted, they will be expanded: [globs] will be evaluated, whitespace will collapse, and the string will be interpreted as multiple strings delimited by whitespace. It is recommended to quote your strings to prevent unwanted expansion, unless you know for certain it will not expand. Use [shell check] to help with this.
+By default, if strings are not quoted, they will be expanded: [globs](/globbing) will be evaluated, whitespace will collapse, and the string will be interpreted as multiple strings delimited by whitespace. It is recommended to quote your strings to prevent unwanted expansion, unless you know for certain it will not expand. Use [shell check] to help with this.
 
 ```bash
 RAW='hello   world'
@@ -72,6 +73,7 @@ echo $RAW # 'hello' 'world'
 
 echo "$RAW" # 'hello   world'
 ```
+-->
 
 ## String Concatenation `+=`
 

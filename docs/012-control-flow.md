@@ -9,3 +9,5 @@ Control flow in bash works very differently to other languages. Instead of branc
 ## While Loops
 
 ## Case Statements
+
+## Piping into Control flow
