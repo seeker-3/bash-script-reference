@@ -18,7 +18,7 @@ chmod u+x script.bash
 ```bash
 bash <script.bash
 echo 'echo hello world!' | bash # hello world
-bash <<<'echo hello world!' # hello world
+bash <<<'echo hello world!'     # hello world
 cat script.bash | bash
 curl -fsSL https://example.com/script.bash | bash
 ```

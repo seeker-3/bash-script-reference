@@ -3,7 +3,7 @@
 ## Read a File to STDIN `<`
 
 ```bash
-command < input.txt
+command <input.txt
 ```
 
 ## Read a String to STDIN `<<<`
@@ -16,13 +16,13 @@ command <<<"$VARIABLE"
 ## Write to a File from STDOUT `>`
 
 ```bash
-command > output.txt
+command >output.txt
 ```
 
 ## Append to a File from STDOUT `>>`
 
 ```bash
-command >> more_output.txt
+command >>more_output.txt
 ```
 
 ## File Descriptors

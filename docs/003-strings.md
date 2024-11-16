@@ -102,9 +102,9 @@ Strings can be sliced using the syntax `${STRING:start:end}` or `${STRING:start}
 
 ```bash
 STRING='hello world'
-echo "${STRING::5}" # hello
-echo "${STRING:1:5}" # ello
-echo "${STRING:6}" # world
+echo "${STRING::5}"   # hello
+echo "${STRING:1:5}"  # ello
+echo "${STRING:6}"    # world
 echo "${STRING:6:-1}" # worl
 ```
 

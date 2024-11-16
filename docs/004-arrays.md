@@ -21,8 +21,8 @@ ARRAY=(
 Arrays are zero indexed and can be accessed like this and support negative indexing.
 
 ```bash
-echo "${ARRAY[0]}" # 1
-echo "${ARRAY[1]}" # hello
+echo "${ARRAY[0]}"  # 1
+echo "${ARRAY[1]}"  # hello
 echo "${ARRAY[-1]}" # world
 ```
 
@@ -39,7 +39,7 @@ To get the whole array, use the `@` symbol. Referencing the array by itself will
 
 ```bash
 echo "${ARRAY[@]}" # '1' 'hello' '3' 'world'
-echo "$ARRAY" # 1
+echo "$ARRAY"      # 1
 ```
 
 If you do not quote the array, the individual elements will be expanded (not recommended).
@@ -47,7 +47,7 @@ If you do not quote the array, the individual elements will be expanded (not rec
 ```bash
 ARRAY=(1 'hello world' 3 world)
 echo "${ARRAY[@]}" # '1' 'hello world' '3' 'world'
-echo  ${ARRAY[@]}  # '1' 'hello' 'world' '3' 'world'
+echo ${ARRAY[@]}   # '1' 'hello' 'world' '3' 'world'
 ```
 
 ## Array Expansion to a Single String `${ARRAY[*]}`
@@ -91,11 +91,11 @@ Slice arrays by using the syntax `${ARRAY[@]:start:length}` or `${ARRAY[@]:start
 ```bash
 ARRAY=(0 1 2 3 4 5 6 7 8 9)
 echo "${ARRAY[@]:1:3}" # '1' '2' '3'
-echo "${ARRAY[@]:5}" # '5' '6' '7' '8' '9'
+echo "${ARRAY[@]:5}"   # '5' '6' '7' '8' '9'
 
 # Or as a string
 echo "${ARRAY[*]:1:3}" # '1 2 3'
-echo "${ARRAY[*]:5}" # '5 6 7 8 9'
+echo "${ARRAY[*]:5}"   # '5 6 7 8 9'
 ```
 
 ## Array Iteration `for ... in ${ARRAY[@]}`
@@ -152,12 +152,12 @@ If you have a command that takes many options, using an array can be a much tidi
 
 ```bash
 COMMAND_ARGS=(
-    -x thing1
-    -x thing2
-    -x thing3
-    -y other-thing
-    --option1
-    --option2
+  -x thing1
+  -x thing2
+  -x thing3
+  -y other-thing
+  --option1
+  --option2
 )
 
 command "${COMMAND_ARGS[@]}"
