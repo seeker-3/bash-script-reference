@@ -30,7 +30,7 @@ Variables in bash are commonly written in upper snake case by convention
 
 ```bash
 MY_VARIABLE=1
-echo $MY_VARIABLE # 1
+echo "$MY_VARIABLE" # 1
 ```
 
 ### Variable Interpolation
