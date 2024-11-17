@@ -7,6 +7,8 @@ ENV LC_ALL=C.UTF-8
 RUN apt-get update
 RUN apt-get -y upgrade
 
+RUN apt-get -y install shfmt
+
 # OMZ
 RUN bash -c "$(curl -fsSL https://raw.github.com/seeker-3/what-the-dock/main/install.bash)"
 

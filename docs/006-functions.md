@@ -63,7 +63,7 @@ fn() {
 fn arg1 arg2 arg3
 ```
 
-[`shellcheck`](bonus) will warn you if you do not supply the right number of arguments when calling a function.
+[`shellcheck`](bonus#shellcheck-a-shell-script-linter) will warn you if you do not supply the right number of arguments when calling a function.
 
 ## Local Variables `local`
 
@@ -146,7 +146,7 @@ echo "${PATHS[@]}" # /usr/bin /usr/lib /usr/share
 
 ## Brackets vs. Parentheses
 
-In bash you can also define functions using `()` instead of `{}`. This essentially executes the function as a subshell instead of a command group. This is generally not needed.
+In bash you can also define functions using `()` instead of `{}`. This essentially executes the function as a [subshell](subshells) instead of a command group. This is generally not needed.
 
 ```bash
 fn() (
@@ -156,7 +156,7 @@ fn() (
 
 ## Passing STDIN to Functions
 
-If you pass standard input to a function, similar to a subshell or command group, the first command in the block will receive the input.
+If you pass standard input to a function, similar to a [subshell](subshells) or command group, the first command in the block will receive the input.
 
 ```bash
 print_stdin() {
@@ -166,7 +166,7 @@ print_stdin() {
 print_stdin <<<'Hello!' # Hello!
 ```
 
-You could use this to setup a pipe as a function
+You could use this to setup a [pipe](pipes) as a function
 
 ```bash
 grep_sort_uniq() {
