@@ -31,7 +31,7 @@ function HomepageHeader() {
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
   return (
-    <Layout title={`${siteConfig.title}`} description="Bash script reference">
+    <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <HomepageHeader />
     </Layout>
   )

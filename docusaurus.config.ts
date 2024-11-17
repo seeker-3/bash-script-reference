@@ -76,6 +76,10 @@ export default {
         },
       ],
     },
+    footer: {
+      style: 'dark',
+      copyright: '🚧 This site is under construction 🚧',
+    },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,

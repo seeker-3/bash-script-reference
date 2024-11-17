@@ -25,7 +25,7 @@
   - `Q` escape and quote
   - `E` escape?
   - `P` interpret string as a variable
-  - `A` Generate a declare statement that, when evaluated, will recreate the array
+  - `A` Generate a declare statement that, when evaluated, will recreate the variable
   - `K` Get all dict keys and values as a string. Values will be double quoted `'key1 "value1" key2 "value2"'`
   - `a` Get all the flags for the variable's declaration
   - `k` Get all dict keys and values as separate strings `${!parameter[@]}` `'key1' 'value1' 'key2' 'value2'`
