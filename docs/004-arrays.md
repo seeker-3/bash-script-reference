@@ -21,6 +21,7 @@ ARRAY=(
 Arrays are zero indexed and can be accessed like this and support negative indexing.
 
 ```bash
+ARRAY=(1 hello 3 world)
 echo "${ARRAY[0]}"  # 1
 echo "${ARRAY[1]}"  # hello
 echo "${ARRAY[-1]}" # world
@@ -38,6 +39,7 @@ echo "${ARRAY[0]}" # 2
 To get the whole array, use the `@` symbol. Referencing the array by itself will only return the first element.
 
 ```bash
+ARRAY=(1 hello 3 world)
 echo "${ARRAY[@]}" # '1' 'hello' '3' 'world'
 echo "$ARRAY"      # 1
 ```
@@ -52,9 +54,10 @@ echo ${ARRAY[@]}   # '1' 'hello' 'world' '3' 'world'
 
 ## Array Expansion to a Single String `${ARRAY[*]}`
 
-To convert the array to a string, use the `*` symbol.
+Convert the array to a string with the elements separated by spaces using the `*` symbol.
 
 ```bash
+ARRAY=(1 'hello world' 3 world)
 echo "${ARRAY[*]}" # '1 hello 3 world'
 ```
 
@@ -63,6 +66,7 @@ echo "${ARRAY[*]}" # '1 hello 3 world'
 Get the keys of an array using the `!` symbol.
 
 ```bash
+ARRAY=(1 'hello world' 3 world)
 echo "${!ARRAY[@]}" # 0 1 2 3
 ```
 
@@ -71,6 +75,7 @@ echo "${!ARRAY[@]}" # 0 1 2 3
 Get the length of an array using the `#` symbol.
 
 ```bash
+ARRAY=(1 'hello world' 3 world)
 echo "${#ARRAY[@]}" # 4
 ```
 
@@ -86,7 +91,7 @@ echo "${ARRAY[@]}" # '1' 'hello' '3' 'world' 'x' 'y' '1' 'hello' '3' 'world'
 
 ## Array Slices `${ARRAY[@]:start:length}`
 
-Slice arrays by using the syntax `${ARRAY[@]:start:length}` or `${ARRAY[@]:start}`. Array slices do not support negative indexing.
+Slice arrays by using the syntax `${ARRAY[@]:start:length}` or `${ARRAY[@]:start}`. Array slices **do not** support negative indexing.
 
 ```bash
 ARRAY=(0 1 2 3 4 5 6 7 8 9)

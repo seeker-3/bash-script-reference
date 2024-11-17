@@ -129,6 +129,8 @@ echo \
 
 This can be useful when you want to break up a long command into multiple lines for better readability.
 
+For example, when installing multiple packages with `apt`, you can put each package on a new line.
+
 ```bash
 apt -y install \
   build-essential \
@@ -137,7 +139,10 @@ apt -y install \
   zsh
 ```
 
+Or a `sed` command that has multiple expressions, you can put each expression on a new line.
+
 ```bash
+# Remove empty lines, leading and trailing whitespace
 sed -E \
   -e '/^[[:space:]]*$/d' \
   -e 's/^[[:space:]]*|[[:space:]]*$//g'

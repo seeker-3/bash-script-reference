@@ -20,7 +20,7 @@ In the script
 echo "$@" # 1 2 3
 ```
 
-`@` is an array, so you can use any syntax listed in the array section to access the elements.
+`@` is an array, so you can use any syntax listed in the [array](arrays) section to access the elements.
 
 From the cli
 
@@ -34,12 +34,26 @@ In the script using an array slice
 echo "${@:2:3}" # 2 3 4
 ```
 
+### Iterating Over Command Line Arguments `for ARG; do`
+
 If you use a for loop with no `in` clause, it will iterate over the cli arguments by default.
+
+From the cli
+
+```bash
+bash script.bash 1 2 3
+```
+
+The script
 
 ```bash
 for ARG; do
   echo "$ARG"
 done
+# Output:
+# 1
+# 2
+# 3
 ```
 
 ### Command Line Arguments as a String `$*`
@@ -87,7 +101,7 @@ bash script.bash 1 2 3 4 5
 In the script using an array slice
 
 ```bash
-echo "$1 $4 $5"
+echo "$1 $4 $5" # 1 4 5
 ```
 
 ### Get the Name of the Script `$0`

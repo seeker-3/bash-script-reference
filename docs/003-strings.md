@@ -7,25 +7,25 @@ The only primitive datatype in bash is a string (numbers are really just strings
 Every character in the string is treated as a literal, no escape sequences, no variable interpolation, whitespace is preserved, `~` does not expand.
 
 ```bash
-RAW='hello\nworld $X'
-echo "$RAW" # hello\nworld $X
+RAW='hello world $X'
+echo "$RAW" # hello world $X
 ```
 
 ## Interpolated Strings `"...$X..."`
 
-Variables and [subshells] are interpolated, interpolation can be escaped, whitespace is preserved, `~` does not expand.
+Variables and [subshells](subshells) are interpolated, interpolation can be escaped, whitespace is preserved, `~` does not expand.
 
 Escapable: `\$`, `\"`, `\\`, `\\\``
 
 ```bash
 X=1
-INTERPOLATED='hello\nworld $X'
-echo "$INTERPOLATED" # hello\nworld 1
+INTERPOLATED="hello world $X"
+echo "$INTERPOLATED" # hello world 1
 ```
 
 ## Unquoted Strings `hello/world`
 
-Variables and [subshells] are interpolated, `~` expands, whitespace is not allowed, syntax characters like `(`, `)`, `<`, `>`, `|`, `;` are not allowed.
+Variables and [subshells](subshells) are interpolated, `~` at the beginning expands, whitespace is not allowed, syntax characters like `(`, `)`, `<`, `>`, `|`, `;` are not allowed.
 
 Syntax characters and whitespace can be escaped with `\` but it is probably better to use quoted strings instead of many escapes.
 
@@ -37,14 +37,16 @@ echo "$EXPANDED" # /home/user/hello world
 
 ## ANSI-C Escape Strings `$'...\n'`
 
-Similar to raw strings except ansi escape sequences are allowed.
+Similar to raw strings except ansi escape sequences are interpreted.
 
 Variables are not interpolated, whitespace is preserved, `~` is not expanded, supports standard escape sequences like `\n`, `\t`, `\r`, etc.
 
 ```bash
-ESCAPED=$'hello\nworld $X'
-echo "$ESCAPED" # hello
-#world $X
+ESCAPED=$'hello\n world $X'
+echo "$ESCAPED"
+# Output:
+# hello
+# world $X
 ```
 
 ## Multiline Strings
@@ -52,14 +54,14 @@ echo "$ESCAPED" # hello
 All quoted strings by default are multiline strings.
 
 ```bash
-RAW='hello
-world'
+RAW='line1
+line2'
 
-INTERPOLATED="hello
-world"
+INTERPOLATED="line1
+line2"
 
-ESCAPED=$'hello
-world'
+ESCAPED=$'line1
+line2'
 ```
 
 <!--
@@ -80,20 +82,24 @@ echo "$RAW" # 'hello   world'
 Strings can be concatenated using the `+=` operator.
 
 ```bash
-VAR=hello
-VAR+=' world'
-echo "$VAR" # hello world
+VAR=text
+VAR+=' more text'
+echo "$VAR" # text more text
 ```
 
-Note that bash is unique in that you can use `+=` but cannot use `+` by itself to concatenate strings `VAR=x+y` ❌. Instead you would use interpolation `VAR="$x$y"` ✅.
+:::note
+
+Bash is unique in that you can use `+=` but cannot use `+` by itself to concatenate strings `VAR=x+y` ❌. Instead you would use interpolation `VAR="$X$Y"` ✅.
+
+:::
 
 ## String Composition `'...'"..."`
 
-String types can easily be combined in one definition. This is often used if you need the properties of multiple strings at once.
+String types can easily be combined in one expression. This is often used if you need the properties of multiple strings at once.
 
 ```bash
 VAR=hello
-COMBINED=~/"$VAR"/world/'path with spaces'/
+COMBINED=~/"$VAR"/world/'path with spaces'/$'\n'
 ```
 
 ## String Slices `${STRING:start:end}`

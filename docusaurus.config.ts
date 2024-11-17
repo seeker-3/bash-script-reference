@@ -6,7 +6,7 @@ const title = 'Bash Script Reference'
 
 export default {
   title,
-  tagline: 'Bash is cool',
+  tagline: 'The easy way to learn Bash scripting',
   favicon: 'img/SimpleIconsGnubashDark.svg',
 
   // Production url
