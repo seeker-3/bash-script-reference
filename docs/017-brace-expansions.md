@@ -17,3 +17,13 @@ echo {0..10..2} # 0 2 4 6 8 10
 ```
 
 ## Brace Expansions `prefix{middle1,middle2,}suffix`
+
+Will expand the prefix and suffix with each value inside the braces. `,,` will expand to the prefix and suffix without a value in between.
+
+```bash
+echo prefix-{middle1,middle2,,middle4}-suffix # prefix-middle1-suffix prefix-middle2-suffix prefix--suffix prefix-middle4-suffix
+```
+
+```bash
+cp file.txt{,.bak} # Expands to `cp file.txt file.txt.bak`
+```

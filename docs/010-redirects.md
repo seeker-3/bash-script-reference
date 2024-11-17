@@ -1,27 +1,48 @@
 # Redirects
 
-## Read a File to STDIN `<`
+## Read a File into STDIN `<`
 
 ```bash
 command <input.txt
 ```
 
-## Read a String to STDIN `<<<`
+## Read a String into STDIN `<<<`
 
 ```bash
 command <<<'string'
 command <<<"$VARIABLE"
 ```
 
-## Read a Raw String to STDIN `<<`
+## Read a Raw String into STDIN `<<`
 
-## Write to a File from STDOUT `>`
+```bash
+command <<EOF
+raw
+string
+EOF
+```
+
+```bash
+command <<-EOF
+raw
+string
+EOF
+```
+
+```bash
+command <<'EOF'
+raw
+string
+EOF
+```
+
+## Write STDOUT to a File `>`
 
 ```bash
 command >output.txt
 ```
 
-## Append to a File from STDOUT `>>`
+## Append STDOUT to a File `>>`
 
 ```bash
 command >>more_output.txt
@@ -29,6 +50,22 @@ command >>more_output.txt
 
 ## File Descriptors
 
-## Open a File `exec fd<>file.txt`
+- `0` STDIN
+- `1` STDOUT
+- `2` STDERR
 
-## Close a File `exec fd>&-`
+### Redirect from STDOUT `1>fd`
+
+### Redirect from STDERR `2>fd`
+
+### Redirect from STDOUT and STDERR `&>fd`
+
+### Redirect to STDOUT `fd>&1`
+
+### Redirect to STDERR `fd>&2`
+
+### Custom File Descriptor
+
+#### Open a File `exec fd<>file.txt`
+
+#### Close a File `exec fd>&-`

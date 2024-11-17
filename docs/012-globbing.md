@@ -83,7 +83,15 @@ echo [[:digit:][:alpha:]]*
 
 Bash has an extended globbing feature that should be on by default in newer version fo bash can be turned on with `shopt -s extglob`. Extended globs allow you to specify lists of patterns separated by `|`.
 
-### Match Zero or One Pattern List `?(pattern-list)`
+### Match One of the Pattern List `@(pattern-list)`
+
+TODO
+
+### Match Anything Except One of the Pattern List `!(pattern-list)`
+
+TODO
+
+### Match Zero or One of the Pattern List `?(pattern-list)`
 
 If you wanted to match all `.txt` files, `.bash` files, or no extension files, you could use the following pattern.
 
@@ -91,19 +99,11 @@ If you wanted to match all `.txt` files, `.bash` files, or no extension files, y
 echo *?(.txt|.bash)
 ```
 
-### Match Zero or More Pattern List `*(pattern-list)`
+### Match Zero or More of the Pattern List `*(pattern-list)`
 
 TODO
 
-### Match One or More Pattern List `+(pattern-list)`
-
-TODO
-
-### Match One of the Pattern List `@(pattern-list)`
-
-TODO
-
-### Match Anything Except One of the Pattern List `!(pattern-list)`
+### Match One or More of the Pattern List `+(pattern-list)`
 
 TODO
 

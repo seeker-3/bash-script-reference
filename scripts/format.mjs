@@ -42,13 +42,15 @@ async function formatDocument(path) {
       //   const array = await promise
 
       //   if (i % 2 === 0) return array.concat(segment)
-      //   const result = await execAsync(`shfmt -i 2 -s <<'EOF'\n${segment}\nEOF`)
+      //   const result = await execAsync(`shfmt -i 2 -s <<'STICKY-DRAMA'\n${segment}\nSTICKY-DRAMA`)
 
       //   return array.concat(code(result.stdout))
       // }, Promise.resolve([]))
       .map(async (segment, i) => {
         if (i % 2 === 0) return segment
-        const result = await execAsync(`shfmt -i 2 -s <<'EOF'\n${segment}\nEOF`)
+        const result = await execAsync(
+          `shfmt -i 2 -s <<'STICKY-DRAMA'\n${segment}\nSTICKY-DRAMA`
+        )
 
         return code(result.stdout)
       })

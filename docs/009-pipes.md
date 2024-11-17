@@ -4,4 +4,12 @@ Pipes are an extremely powerful feature of the shell. They allow you to take the
 
 ## Pipe STDOUT to STDIN `|`
 
+```bash
+command1 | command2
+```
+
 ## Pipe STDOUT and STDERR to STDIN `|&`
+
+```bash
+command1 |& command2
+```
