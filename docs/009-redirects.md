@@ -13,6 +13,8 @@ command <<<'string'
 command <<<"$VARIABLE"
 ```
 
+## Read a Raw String to STDIN `<<`
+
 ## Write to a File from STDOUT `>`
 
 ```bash

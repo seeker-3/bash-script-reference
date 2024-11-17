@@ -95,8 +95,8 @@ reorder() {
             ) | sed 's/^/  /' >&2
             continue
 
-        else
-            echo -e "${GREEN}matched${RESET} $short_order_file"
+            # else
+            # echo -e "${GREEN}matched${RESET} $short_order_file"
         fi
 
         # Verify that each keyword in the order file matches exactly one document

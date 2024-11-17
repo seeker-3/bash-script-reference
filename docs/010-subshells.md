@@ -2,8 +2,6 @@
 
 ## Subshells `()`
 
-## Command Groups `{}`
-
 ## Command Substitution `$(...)`
 
 ```bash
@@ -21,3 +19,5 @@ diff <(command1) <(command2)
 ```bash
 command | tee >(command1) >(command2) >(command3) > >(command4)
 ```
+
+## Command Groups `{}`
