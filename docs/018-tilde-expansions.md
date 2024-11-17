@@ -3,15 +3,15 @@
 When place unquoted and at the beginning of a string, `~` will expand to the home directory of the current user.
 
 ```bash
-whoami # user
-echo ~ # /home/user
+whoami      # user
+echo ~      # /home/user
 echo ~/apps # /home/user/apps
 ```
 
 If placed in quotes or not at the beginning of a string, `~` will not expand.
 
 ```bash
-echo '~'/apps # '~/apps'
+echo '~'/apps      # '~/apps'
 echo apple~bananas # apple~bananas
 ```
 
@@ -20,9 +20,9 @@ echo apple~bananas # apple~bananas
 When `~` is followed by a username, it will expand to the home directory of that user.
 
 ```bash
-echo ~root # /root
-echo ~root/bin # /root/bin
-echo ~user # /home/user
+echo ~root      # /root
+echo ~root/bin  # /root/bin
+echo ~user      # /home/user
 echo ~user/apps # /home/user/apps
 ```
 

@@ -81,10 +81,10 @@ References to outside variables can be created using `local -n`. References will
 
 ```bash
 add_world() {
-    local -n greeting_ref=$1
-    echo "$greeting_ref" # Hello
-    greeting_ref+=', World'
-    echo "$greeting_ref" # Hello, World
+  local -n greeting_ref=$1
+  echo "$greeting_ref" # Hello
+  greeting_ref+=', World'
+  echo "$greeting_ref" # Hello, World
 }
 
 GREETING=Hello
@@ -131,12 +131,12 @@ echo "$SOME_STRING" # Some string
 
 ```bash
 prefix_paths() {
-    local prefix="$1"
+  local prefix="$1"
 
-    local path
-    for path in "${@:2}"; do
-        echo "$prefix/$path"
-    done
+  local path
+  for path in "${@:2}"; do
+    echo "$prefix/$path"
+  done
 }
 
 mapfile -t PATHS PATHS <<<"$(prefix_paths '/usr' 'bin' 'lib' 'share')"
@@ -201,5 +201,5 @@ maybe_stdin() {
 }
 
 maybe_stdin <<<'Here is some input!' # stdin is: Here is some input!
-maybe_stdin # No stdin
+maybe_stdin                          # No stdin
 ```

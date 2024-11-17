@@ -4,6 +4,7 @@ strings
 arrays
 associative-arrays
 functions
+word-splitting
 special-parameters
 pipes
 redirects
