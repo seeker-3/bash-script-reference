@@ -54,7 +54,7 @@ export default {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/SimpleIconsGnubash.png',
+    image: 'img/social-card.png',
     navbar: {
       title,
       logo: {

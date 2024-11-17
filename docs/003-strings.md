@@ -89,7 +89,9 @@ echo "$VAR" # text more text
 
 :::note
 
-Bash is unique in that you can use `+=` but cannot use `+` by itself to concatenate strings `VAR=$X+$Y` ❌. Instead you would use interpolation `VAR="$X$Y"` ✅.
+Bash is unique in that you can use `+=` but cannot use `+` by itself to concatenate strings `VAR=$X+$Y` ❌.
+
+Instead you would use interpolation `VAR="$X$Y"` ✅.
 
 :::
 

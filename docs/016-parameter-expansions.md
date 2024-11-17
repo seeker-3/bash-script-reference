@@ -1,4 +1,4 @@
-# Parameter Expansions `VAR2=${VAR...}`
+# Parameter Expansions `${VAR...}`
 
 - `${parameter:-word}` default value
 - `${parameter:=word}` default value and set
