@@ -35,3 +35,4 @@
 - `echo`
 - `read`
 - `mapfile`
+- `exit`

@@ -1,6 +1,59 @@
 # Globbing
 
-Globbing is a basic pattern matching feature that lets you match files or strings. A glob expression will expand to a list of files that match the pattern. If no files match the pattern, the glob expression will remain unexpanded.
+Globbing is a basic pattern matching feature that lets you match strings or files.
+
+To match strings, glob expressions can be used in [conditionals](conditionals), [case statements](control-flow#case-statements), or [parameter expansions](parameter-expansions).
+
+To match files, a glob expression placed in a command or an array definition will be expanded to a list of files that match the pattern. If no files match the pattern, the glob expression will be left as is.
+
+<!--
+## Usages
+
+In a command
+
+```bash
+echo *
+```
+
+In a for loop
+
+```bash
+for FILE in *; do
+  echo "$FILE"
+done
+```
+
+In an array definition
+
+```bash
+FILES=(*)
+```
+
+In a conditional
+
+```bash
+if [[ $STRING == * ]]; then
+
+fi
+```
+
+In a case statement
+
+```bash
+case $STRING in
+
+*)
+  echo 'There are no txt files'
+  ;;
+esac
+```
+
+In a parameter expansion
+
+```bash
+echo ${STRING##*.}
+```
+-->
 
 ## Wildcards `*`
 
@@ -10,6 +63,20 @@ This will print all files in the current directory.
 
 ```bash
 echo *
+```
+
+This will iterate over all files in the current directory.
+
+```bash
+for FILE in *; do
+  echo "$FILE"
+done
+```
+
+This will store all files in the current directory in an array.
+
+```bash
+FILES=(*)
 ```
 
 This will print all the `.txt` files in the current directory.

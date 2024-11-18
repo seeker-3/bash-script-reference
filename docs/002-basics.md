@@ -139,10 +139,10 @@ apt -y install \
   zsh
 ```
 
-Or a `sed` command that has multiple expressions, you can put each expression on a new line.
+Or a `sed` command that has multiple expressions, you can put each expression on a separate line.
 
 ```bash
-# Remove empty lines, leading and trailing whitespace
+# Remove blank lines, leading and trailing whitespace on non-empty lines
 sed -E \
   -e '/^[[:space:]]*$/d' \
   -e 's/^[[:space:]]*|[[:space:]]*$//g'

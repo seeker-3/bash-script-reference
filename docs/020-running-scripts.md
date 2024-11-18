@@ -1,5 +1,9 @@
 # Running Scripts
 
+## Hashbang/Shebang `#!`
+
+## File Extensions `sh` vs `bash`
+
 ## Running Scripts as Files
 
 ```bash

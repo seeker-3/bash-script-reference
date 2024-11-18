@@ -54,18 +54,22 @@ command >>more_output.txt
 - `1` STDOUT
 - `2` STDERR
 
-### Redirect from STDOUT `1>fd`
+### Redirect from STDOUT `1>file`
 
-### Redirect from STDERR `2>fd`
+### Redirect from STDERR `2>file`
 
-### Redirect from STDOUT and STDERR `&>fd`
+### Redirect from STDOUT and STDERR `&>file`
 
 ### Redirect to STDOUT `fd>&1`
 
 ### Redirect to STDERR `fd>&2`
 
+### Discarding Output `fd>/dev/null`
+
+### Redirect Input `fd<file`
+
 ### Custom File Descriptor
 
-#### Open a File `exec fd<>file.txt`
+#### Open a File `exec fd<>file`
 
 #### Close a File `exec fd>&-`
