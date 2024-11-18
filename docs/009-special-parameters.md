@@ -120,7 +120,7 @@ In the script
 echo "$0" # script.bash
 ```
 
-<!-- Get the set options `$-` -->
+<!-- TODO Get the set options `$-` -->
 
 ## Process Introspection
 

@@ -6,7 +6,7 @@ To match strings, glob expressions can be used in [conditionals](conditionals), 
 
 To match files, a glob expression placed in a command or an array definition will be expanded to a list of files that match the pattern. If no files match the pattern, the glob expression will be left as is.
 
-<!--
+<!-- TODO ?
 ## Usages
 
 In a command
@@ -152,11 +152,11 @@ Bash has an extended globbing feature that should be on by default in newer vers
 
 ### Match One of the Pattern List `@(pattern-list)`
 
-TODO
+<!-- TODO -->
 
 ### Match Anything Except One of the Pattern List `!(pattern-list)`
 
-TODO
+<!-- TODO -->
 
 ### Match Zero or One of the Pattern List `?(pattern-list)`
 
@@ -168,11 +168,11 @@ echo *?(.txt|.bash)
 
 ### Match Zero or More of the Pattern List `*(pattern-list)`
 
-TODO
+<!-- TODO -->
 
 ### Match One or More of the Pattern List `+(pattern-list)`
 
-TODO
+<!-- TODO -->
 
 ## Globbing Options `shopt -s option`
 

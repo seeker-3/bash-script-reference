@@ -53,8 +53,7 @@ export default {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/social-card.png',
+    image: 'img/social-card.png', // Social card
     navbar: {
       title,
       logo: {
@@ -69,6 +68,11 @@ export default {
           position: 'left',
           label: 'Reference',
         },
+        // {
+        //   href: 'https://discord.com/',
+        //   label: 'Discord',
+        //   position: 'right',
+        // },
         {
           href: 'https://github.com/seeker-3/bash-script-reference',
           label: 'GitHub',

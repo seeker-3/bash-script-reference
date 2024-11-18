@@ -1,4 +1,8 @@
 // @ts-check
+
+// Format markdown code blocks in the docs directory using shfmt
+// Usage: node scripts/format.mjs
+
 import { exec } from 'node:child_process'
 import { readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'

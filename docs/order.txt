@@ -20,4 +20,3 @@ tilde-expansions
 strict-mode
 running-scripts
 bonus
-full-reference

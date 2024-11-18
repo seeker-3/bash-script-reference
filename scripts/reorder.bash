@@ -1,3 +1,13 @@
+# Reorder documents in the docs directory according to the order file
+# The order file is a text file that contains the names of the documents in the order they should appear
+# The order file should be placed in the same directory as the documents
+# The order file should contain one document name per line
+#   and the document name should not contain the number prefix or the the file extension
+# Usage: bash reorder.bash [--dry|--dry-run|-d] [--overwrite|-o]
+# Options:
+#   --dry, --dry-run, -d: Perform a dry run without modifying the files
+#   --overwrite, -o: Overwrite the existing order files with the doc filenames in the current order
+
 set -euo pipefail
 shopt -s extglob globstar nullglob
 
@@ -11,13 +21,13 @@ ORDER_FILENAME=order.txt
 
 DOCS_DIR=$(dirname "$(dirname "$(realpath "$0")")")/docs
 
-if [[ $* == *--dry* || $* == *--dry-run* || $* == *-?(d|o)d* ]]; then
+if [[ $* == *--dry* || $* == *--dry-run* || $* == *-*(d|o)d* ]]; then
     IS_DRY=true
 else
     IS_DRY=false
 fi
 
-if [[ $* == *--overwrite* || $* == *-?(d|o)o* ]]; then
+if [[ $* == *--overwrite* || $* == *-*(d|o)o* ]]; then
     IS_OVERWRITE=true
 else
     IS_OVERWRITE=false

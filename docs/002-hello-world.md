@@ -4,13 +4,13 @@ This file will walk you through the basics of what you need to know to get start
 
 ## Bash Version
 
-Bash should come by default on most Unix/Linux systems. You can see which version of bash you have with the version flag.
+Bash should come by default on most Unix/Linux systems. You can see which version of bash you have with the `--version` flag.
 
 ```bash
 bash --version
 ```
 
-<!-- Script for getting the latest version? -->
+<!-- TODO Script for getting the latest version? -->
 
 ```txt
 GNU bash, version 5.2.15(1)-release (x86_64-pc-linux-gnu)

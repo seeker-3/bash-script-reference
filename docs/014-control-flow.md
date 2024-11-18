@@ -1,16 +1,16 @@
 # Control Flow
 
-Control flow in bash works very differently to other languages. Instead of branching on `true` or `false`, bash will branch on the exit status of a command. A successful command with an exit status of `0` is `true`, and a failed command with a non-zero exit status of `1..255` is `false`.
+Control flow in bash works very differently to other languages. Instead of branching on `true` or `false`, bash will branch on the exit status of a command. A successful command with an exit status of `0` is "true", and a failed command with a non-zero exit status of `1..255` is "false".
 
 ## If Statements
 
 ```bash
 if command1; then
-  echo 'command1 succeeded'
+  echo 'command1 succeeded!'
 elif command2; then
-  echo 'command2 succeeded'
+  echo 'command1 failed but command2 succeeded!'
 else
-  echo 'command1 and command2 failed'
+  echo 'command1 and command2 failed!'
 fi
 ```
 
@@ -26,11 +26,13 @@ done
 # 3
 ```
 
+<!-- TODO list comprehensions -->
+
 ## While Loops
 
 ```bash
 while command; do
-  echo 'command succeeded'
+  echo 'command is succeeding'
 done
 ```
 
@@ -44,7 +46,7 @@ pattern1)
 pattern2)
   echo 'string matches pattern2'
   ;;
-*)
+*) # All strings aka default case
   echo 'string does not match any pattern'
   ;;
 esac
@@ -64,10 +66,12 @@ done | command
 # 010
 ```
 
+<!-- TODO you *can* pipe into for loops but while loops are better because for loops cause word splitting -->
+
 ```bash
-command | while read -r line; do
+command1 | while read -r line; do
   echo "$line"
-done
+done | command2
 ```
 
 ```bash
@@ -76,4 +80,18 @@ command1 | if condition; then
 else
   false_command
 fi | command2
+```
+
+```bash
+command1 | case string in
+pattern1)
+  pattern1_command
+  ;;
+pattern2)
+  pattern2_command
+  ;;
+*)
+  default_command
+  ;;
+esac | command2
 ```

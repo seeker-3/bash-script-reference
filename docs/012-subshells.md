@@ -10,6 +10,8 @@
 )
 ```
 
+<!-- TODO using cd -->
+
 ## Command Substitution `$(...)`
 
 ```bash
@@ -36,6 +38,24 @@ diff <(
 ) <(
   g++ -o problem problem.cpp && ./problem | sort
 )
+```
+
+Input process substitutions can also be used if you want to avoid using a pipe for whatever reason. For instance, if you want to convert the output of a command to an array, you cannot use a pipe because pipes create subshells and the variable will not persist into the parent scope.
+
+This won't work ❌
+
+```bash
+echo 1 2 3 | read -ra ARRAY
+echo "${ARRAY[@]}" # empty
+```
+
+Instead we can use process substitution to create an anonymous file and pass it to stdin via `<`:
+
+This works ✅
+
+```bash
+read -ra ARRAY < <(echo 1 2 3)
+echo "${ARRAY[@]}" # 1 2 3
 ```
 
 ### Output Process Substitution `>(...)`

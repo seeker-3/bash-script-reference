@@ -147,3 +147,26 @@ sed -E \
   -e '/^[[:space:]]*$/d' \
   -e 's/^[[:space:]]*|[[:space:]]*$//g'
 ```
+
+### Temporary Environment Variables `VAR=value command`
+
+This is not super useful for scripting, but it's worth mentioning that if you set a variable and then run a command after it, the variable will only be set for that command.
+
+```bash
+TMP_ENV_VAR=1 some_command
+echo $TMP_ENV_VAR # (nothing)
+```
+
+This syntax essentially sets the variable for the command and then unsets it after the command is run. The value is also not accessible in the command itself.
+
+```bash
+X=1 echo $X # (nothing)
+```
+
+Temporary environment variables, similar to cli arguments, is just another way to pass arguments to a command.
+
+```bash
+EDITOR=nvim git commit            # opens the commit message in nvim
+NODE_ENV=production npm run build # builds the project in production mode
+USE_SSH=true npx docusarus deploy # deploys the site using ssh
+```

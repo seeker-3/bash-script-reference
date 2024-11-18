@@ -2,7 +2,11 @@
 
 ## Hashbang/Shebang `#!`
 
+<!-- TODO -->
+
 ## File Extensions `sh` vs `bash`
+
+<!-- TODO -->
 
 ## Running Scripts as Files
 

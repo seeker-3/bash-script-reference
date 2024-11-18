@@ -7,6 +7,10 @@ echo {1..5} # 1 2 3 4 5
 ```
 
 ```bash
+echo {a..e} # a b c d e
+```
+
+```bash
 for i in {1..5}; do
   echo "$i"
 done
@@ -17,7 +21,11 @@ echo {0..10..2} # 0 2 4 6 8 10
 ```
 
 ```bash
-echo x{1..5} # x1 x2 x3 x4 x5
+echo x{1..5}x # x1x x2x x3x x4x x5x
+```
+
+```bash
+echo {0..2}{a..c} # 0a 0b 0c 1a 1b 1c 2a 2b 2c
 ```
 
 ## Brace Expansions `prefix{middle1,middle2,}suffix`
