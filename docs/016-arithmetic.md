@@ -1,12 +1,12 @@
 # Arithmetic `((x+=y))`
 
-Bash only supports integer arithmetic. The `(( ))` construct is used to evaluate arithmetic expressions. The `$` is not required to use variables inside the expression.
+Bash only supports integer arithmetic. Bash uses signed 64-bit integers. The `(( ))` construct is used to evaluate arithmetic expressions. The `$` is not required to use variables inside the expression.
 
-- `- +` unary minus and plus
-- `+ -` binary addition and subtraction
-- `* / %` multiplication, division, remainder
+- `-` `+` unary minus and plus
+- `+` `-` binary addition and subtraction
+- `*` `/` `%` multiplication, division, remainder
 - `**` exponentiation
-- `<< >>` left and right bitwise shifts
+- `<<` `>>` left and right bitwise shifts
 - `~` bitwise NOT
 - `&` bitwise AND
 - `|` bitwise OR
@@ -14,13 +14,13 @@ Bash only supports integer arithmetic. The `(( ))` construct is used to evaluate
 - `!` logical NOT
 - `&&` logical AND
 - `||` logical OR
-- `== !=` equality and inequality
-- `<= >= < >` comparison
+- `==` `!=` equality and inequality
+- `<=` `>=` `<` `>` comparison
 - `condition ? true_expr : false_expr` ternary operator
-- `= += -= *= /= %= <<= >>= &= ^= |=` assignment
-- `id++ id--` variable post-increment and post-decrement
-- `++id --id` variable pre-increment and pre-decrement
-- `expr1 , expr2` comma
+- `=` `+=` `-=` `*=` `/=` `%=` `<<=` `>>=` `&=` `^=` `|=` assignment
+- `id++` `id--` variable post-increment and post-decrement
+- `++id` `--id` variable pre-increment and pre-decrement
+- `expr1, expr2` comma
 
 ## Expressions
 
@@ -46,6 +46,14 @@ X=5
 if ((X == 5)); then
   echo 'X is 5'
 fi
+```
+
+## C-Style For Loops
+
+```bash
+for ((i = 0; i < 5; i++)); do
+  echo "$i"
+done
 ```
 
 ## Strings in Arithmetic

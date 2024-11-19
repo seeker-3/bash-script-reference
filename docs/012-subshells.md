@@ -18,6 +18,8 @@
 CAPTURED=$(command)
 ```
 
+<!-- `` syntax -->
+
 ## Process Substitution
 
 Process substitutions essentially let you use subshells as anonymous files. Where a command would typically take a file argument `command file.txt`, process substitution lets you use subcommands as the file `command <(subcommand)`.
