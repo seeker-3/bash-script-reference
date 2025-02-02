@@ -1,6 +1,4 @@
-# Subshells
-
-## Subshells `()`
+# Subshells `()`
 
 ```bash
 (

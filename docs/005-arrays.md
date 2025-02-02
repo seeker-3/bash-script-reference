@@ -1,4 +1,4 @@
-# Arrays
+# Arrays `()`
 
 ## Declaring Arrays `ARRAY=(...)`
 

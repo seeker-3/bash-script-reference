@@ -1,4 +1,4 @@
-# Brace Expansions
+# Brace Expansions `{...}`
 
 ## Ranges `{start..stop..step}`
 

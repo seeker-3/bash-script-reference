@@ -1,4 +1,4 @@
-# Conditionals
+# Conditionals `[[ ... ]]`
 
 <!-- TODO Conditionals are commands -->
 <!-- TODO test and [ are commands, [[ is syntax -->

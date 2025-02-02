@@ -1,4 +1,4 @@
-# Globbing
+# Globbing `*`
 
 Globbing is a basic pattern matching feature that lets you match strings or files.
 

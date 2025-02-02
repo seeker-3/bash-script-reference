@@ -1,4 +1,4 @@
-# Strings
+# Strings `''`
 
 The only primitive datatype in bash is a string (numbers are really just strings!). There are several different ways to define strings.
 

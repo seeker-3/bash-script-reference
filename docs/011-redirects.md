@@ -1,4 +1,4 @@
-# Redirects
+# Redirects `>`
 
 ## Read a File into STDIN `<`
 

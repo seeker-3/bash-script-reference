@@ -1,4 +1,4 @@
-# Associative Arrays
+# Associative Arrays `([key]=value)`
 
 Associative arrays are similar to arrays except they use keys instead of indexes so nearly all the same [array operations](arrays) apply. However, associative arrays do not support an easy way to concatenated/union them together like arrays, and reading them from a string is not as straight forward. Like Arrays, associative arrays cannot be multidimensional.
 
